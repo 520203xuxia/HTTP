@@ -83,7 +83,7 @@
 
 # 五、Http响应头和请求头
 ## 1. 请求头（Request Headers）
-	**Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
+	** Host **： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
 	**Accept**：浏览器可以接受的媒体类型（text/html、*/*）
 	**Accept-Encoding**：浏览器声明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法(gzip，deflate)
 	**Accept-Language**：浏览器声明自己接收的语言。语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等（Accept-Language:en-us）
