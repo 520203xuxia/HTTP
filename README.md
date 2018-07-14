@@ -24,4 +24,4 @@
 		5xx：服务器端错误---服务器未能实现合法的请求
 				500：服务器端错误，一般是服务器端代码出错
 
-![301-jpg](https://520203xuxia.github.io/HTTP/raw/master/img/status-code-301.jpg)
+![301-jpg](https://github.com/520203xuxia/HTTP/raw/master/img/status-code-301.jpg)
