@@ -24,4 +24,47 @@
 		5xx：服务器端错误---服务器未能实现合法的请求
 				500：服务器端错误，一般是服务器端代码出错
 
-![301-jpg](https://github.com/520203xuxia/HTTP/raw/master/img/status-code-301.jpg)
+# 三、为什么需要了解Http缓存？
+	  Http缓存是Web性能优化的重要手段
+
+# 四、缓存规则
+## 1. 强制缓存
+![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
+
+	缓存如果未失效，则直接使用缓存数据。那么怎么判断缓存是否失效呢？
+	Http 响应header中，有两个字段标明失效规则：
+	* Expires：服务器返回的到期时间，HTTP 1.0的东西，基本忽略它的作用
+	* Cache-Control：很重要的规则，默认值为private
+	private:             客户端可以缓存
+	public:              客户端和代理服务器都可缓存（前端的同学，可以    认为public和private是一样的）
+	max-age=xxx:   缓存的内容将在 xxx 秒后失效
+	no-cache:          需要使用对比缓存来验证缓存数据
+	no-store:          所有内容都不会缓存，强制、对比缓存都不会触发
+
+	强制缓存生效时：
+![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
+
+## 2. 对比缓存
+![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
+
+	* 对比缓存，需要进行比较判断是否可以使用缓存。
+	* 浏览器第一次请求数据时，服务器会将缓存标识与数据一起返回给客户 端，客户端将二者备份至缓存数据库中。
+	* 再次请求数据时，客户端将备份的缓存标识发送给服务器，服务器根据缓存标识进行判断，判断成功后，返回304状态码，通知客户端比较成功，可以使用缓存数据。
+
+	对于对比缓存来说，缓存标识的传递是我们着重需要理解的，它在请求header和响应header间进行传递，一共分为两种标识传递：
+
+	1.	Last-Modified  /  If-Modified-Since
+	Last-Modified：
+	服务器在响应请求时，告诉浏览器资源的最后修改时间。
+
+	If-Modified-Since：
+	再次请求服务器时，通过此字段通知服务器上次请求时，服务器返回的资源最后修改时间。
+
+	2.	Etag/If-None-Match（优先级高于Last-Modified/If-Modified-Since）
+	Etag：
+	服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）
+
+	If-None-Match：
+	再次请求服务器时，通过此字段通知服务器客户段缓存数据的唯一标识。
+
+	对比缓存生效时：
