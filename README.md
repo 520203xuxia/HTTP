@@ -29,7 +29,7 @@
 
 # 四、缓存规则
 ## 1. 强制缓存
-	![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
+![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
 
 	缓存如果未失效，则直接使用缓存数据。那么怎么判断缓存是否失效呢？
 	Http 响应header中，有两个字段标明失效规则：
@@ -41,11 +41,11 @@
 		no-cache:       需要使用对比缓存来验证缓存数据
 		no-store:       所有内容都不会缓存，强制、对比缓存都不会触发
 
-	强制缓存生效时：
-	![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
+强制缓存生效时：
+![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
 
 ## 2. 对比缓存
-	![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
+![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
 
 	* 对比缓存，需要进行比较判断是否可以使用缓存。
 	* 浏览器第一次请求数据时，服务器会将缓存标识与数据一起返回给客户 端，客户端将二者备份至缓存数据库中。
@@ -67,7 +67,7 @@
 		If-None-Match：
 		再次请求服务器时，通过此字段通知服务器客户段缓存数据的唯一标识。
 
-	对比缓存生效时：
+对比缓存生效时：
 
 
 
@@ -127,15 +127,15 @@
 
 **Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
 
-	private：客户端可以缓存
+   private：客户端可以缓存
 
-	public：客户端和代理服务器都可缓存（对前端开发者来说，认为public和private是一样的）
+   public：客户端和代理服务器都可缓存（对前端开发者来说，认为public和private是一样的）
 
-	max-age=xxx：缓存的内容将在xxx秒后失效
+   max-age=xxx：缓存的内容将在xxx秒后失效
 
-	no-cache：内容会被缓存，只是每次使用都需要向服务器验证其有效性
+   no-cache：内容会被缓存，只是每次使用都需要向服务器验证其有效性
 
-	no-store：所有内容都不会缓存，强制缓存，对比缓存都不会触发（但对于前端开发来说，缓存越多越好，所以这个值基本不用）
+   no-store：所有内容都不会缓存，强制缓存，对比缓存都不会触发（但对于前端开发来说，缓存越多越好，所以这个值基本不用）
 
 **Last-Modified**：服务器在响应请求时，告诉浏览器资源的最后修改时间。
 
