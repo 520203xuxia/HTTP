@@ -85,15 +85,13 @@
 ## 1. 请求头（Request Headers）
 **Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
 
-**Accept**：浏览器可以接受的媒体类型（text/html、*/*）
+**Accept**：浏览器可以接受的媒体类型（text/html、/*//*）
 
 **Accept-Encoding**：浏览器声明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法(gzip，deflate)
 
 **Accept-Language**：浏览器声明自己接收的语言。语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等（Accept-Language:en-us）
 
 **Connection**：keep-alive，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。如果是Connection：close，代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭，当客户端再次放松Request，需要重新建立TCP连接。
-
-**Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
 
 **User-Agent**：告诉服务器，客户端使用的操作系统和浏览器的名称和版本。
 
@@ -127,15 +125,15 @@
 
 **Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
 
-   private：客户端可以缓存
+   - private：客户端可以缓存
 
-   public：客户端和代理服务器都可缓存（对前端开发者来说，认为public和private是一样的）
+   - public：客户端和代理服务器都可缓存（对前端开发者来说，认为public和private是一样的）
 
-   max-age=xxx：缓存的内容将在xxx秒后失效
+   - max-age=xxx：缓存的内容将在xxx秒后失效
 
-   no-cache：内容会被缓存，只是每次使用都需要向服务器验证其有效性
+   - no-cache：内容会被缓存，只是每次使用都需要向服务器验证其有效性
 
-   no-store：所有内容都不会缓存，强制缓存，对比缓存都不会触发（但对于前端开发来说，缓存越多越好，所以这个值基本不用）
+   - no-store：所有内容都不会缓存，强制缓存，对比缓存都不会触发（但对于前端开发来说，缓存越多越好，所以这个值基本不用）
 
 **Last-Modified**：服务器在响应请求时，告诉浏览器资源的最后修改时间。
 
@@ -152,6 +150,7 @@
 **Access-Control-Allow-Origin**：
 
 **Access-Control-Allow-Methods**：
+
 
 
 	请求头和相应头中都有Cache-Control字段，有什么区别？
