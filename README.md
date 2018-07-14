@@ -29,7 +29,7 @@
 
 # 四、缓存规则
 ## 1. 强制缓存
-![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
+	![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
 
 	缓存如果未失效，则直接使用缓存数据。那么怎么判断缓存是否失效呢？
 	Http 响应header中，有两个字段标明失效规则：
@@ -42,10 +42,10 @@
 		no-store:       所有内容都不会缓存，强制、对比缓存都不会触发
 
 	强制缓存生效时：
-![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
+	![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
 
 ## 2. 对比缓存
-![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
+	![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
 
 	* 对比缓存，需要进行比较判断是否可以使用缓存。
 	* 浏览器第一次请求数据时，服务器会将缓存标识与数据一起返回给客户 端，客户端将二者备份至缓存数据库中。
@@ -71,12 +71,13 @@
 
 
 
-	两类缓存规则的不同：
-	* 强制缓存如果生效，不需要再和服务器发生交互。
-	* 对比缓存不管是否生效，都需要与服务端发生交互。
-	* 两类缓存规则可以同时存在，强制缓存优先级高于对比缓存。
+两类缓存规则的不同：
+* 强制缓存如果生效，不需要再和服务器发生交互。
+* 对比缓存不管是否生效，都需要与服务端发生交互。
+* 两类缓存规则可以同时存在，强制缓存优先级高于对比缓存。
 
 	对于强制缓存，服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略。
+
 	对于比较缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存
 
 
