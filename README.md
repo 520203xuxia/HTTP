@@ -81,3 +81,50 @@
 	 - **对于比较缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存**
 
 
+# 五、Http响应头和请求头
+## 1. 请求头（Request Headers）
+	**Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
+	**Accept**：浏览器可以接受的媒体类型（text/html、*/*）
+	**Accept-Encoding**：浏览器声明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法(gzip，deflate)
+	**Accept-Language**：浏览器声明自己接收的语言。语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等（Accept-Language:en-us）
+	**Connection**：keep-alive，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。如果是Connection：close，代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭，当客户端再次放松Request，需要重新建立TCP连接。
+	**Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
+	**User-Agent**：告诉服务器，客户端使用的操作系统和浏览器的名称和版本。
+	**Referer**： 当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器籍此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。
+	**Cookie**：用来存储一些用户信息以便让服务器辨别用户身份的。
+	**Cache-Control**：通用首部字段。 我们网页的缓存控制是由HTTP头中的“Cache-control”来实现的，常见值有private、no-cache、max-age、must-revalidate等，默认为private。
+	**If-Modified-Since**： 把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。
+	**If-None-Match**： If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能。
+	**Proxy-Connection**：
+
+## 2. 响应头（Response Headers）
+	**Server**：响应客户端的服务器。
+	**Date**：响应的时间。
+	**Connection**：keep-alive，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。如果是Connection：close，代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭，当客户端再次放松Request，需要重新建立TCP连接。
+	**Proxy-Connection**：
+	**Pragma**：HTTP 1.0的遗留物，值为”no-chche“时禁用缓存
+	**ETag**：服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识
+	**Expires**：为服务端返回的到期时间，即下一次请求时，请求时间小于服务器返回的到期时间，直接使用缓存数据，但这是HTTP 1.0的东西，现在浏览器默认使用HTTP 1.1，所以他的作用基本忽略。
+	**Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
+		private：客户端可以缓存
+		public：客户端和代理服务器都可缓存（对前端开发者来说，认为public和private是一样的）
+		max-age=xxx：缓存的内容将在xxx秒后失效
+		no-cache：内容会被缓存，只是每次使用都需要向服务器验证其有效性
+		no-store：所有内容都不会缓存，强制缓存，对比缓存都不会触发（但对于前端开发来说，缓存越多越好，所以这个值基本不用）
+	**Last-Modified**：服务器在响应请求时，告诉浏览器资源的最后修改时间。
+	**Content-Type**：响应正文的类型。（图片还是二进制字符串）
+	**Content-Length**：响应正文长度。
+	**Content-Charset**：响应正文使用的编码。
+	**Content-Encoding**：响应正文使用的数据压缩格式
+	**Content-Language**：响应正文使用的语言
+	**Access-Control-Allow-Origin**：
+	**Access-Control-Allow-Methods**：
+
+	请求头和相应头中都有Cache-Control字段，有什么区别？
+相应头中的这个属性是服务器端告诉客户端应该怎么做，做不做还是决定于客户端。
+	如何理解请求头中Cache-Control：max-age=0，而响应头中Cache-Control：max-age=3600?
+客户端强制要求服务端返回最新文件，响应头中是服务器端告诉客户端，该文件在3600s内不用再向服务器端请求了。但如果请求头下次请求时该字段值为max-age=0，则就必须由服务器返回最新文件。
+
+	响应头中Cache-Control：max-age=0。
+代表服务器要求浏览器你在使用本地缓存的时候，必须先和服务器进行一遍通信，将etag、 If-Not-Modified等字段传递给服务器以便验证当前浏览器端使用的文件是否是最新的（如果浏览器用的是最新的文件，http状态码返回304，服务器告诉浏览器使用本地缓存即可；否则返回200，浏览器得自己把文件重新下载一遍）。
+
