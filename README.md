@@ -26,7 +26,6 @@
 # 二、Http协议发展历史
 ![history](https://github.com/520203xuxia/HTTP/raw/master/img/http-history.jpg)
 
-	Http/0.9 ----> Http/1.0 ----> Http/1.1 ----> SPDY----> Http/2
 ## 1. Http/0.9
 	该版本极其简单，只有一个命令GET。
 	GET  /index.html
@@ -45,7 +44,7 @@
 	些元数据。
 
 	* 其他新增功能还包括状态码（status code）、多字符集支持、多部分发送（multi-part 
-	type）、权限（authorization）、缓存（cache）、内容编码（content encoding）等。
+	type）、权限（authorization）、缓存（If-Modified-Since,Expires）、内容编码（content encoding）等。
 
 
 	缺点：
@@ -56,10 +55,12 @@
 	。所以，HTTP 1.0版本的性能比较差。随着网页加载的外部资源越来越多，这个问题就愈发突出了。
 
 ## 3. Http/1.1
-	仅比Http/1.0 版本晚了半年，一直用到了20年后的今天，直到现在还是最流行的版本
+	仅比Http/1.0 版本晚了半年，一直用到了今天，直到现在还是最流行的版本
 	该版本的变化：
 
 	* 引入了持久连接，即TCP连接默认不关闭，可以被多个请求复用，不用声明Connection:Keep-alive。
+
+	* 引入更多的缓存控制策略例如Entity tag，If-modified-Since, If-Match, If-None-Match等
 
 	* 客户端和服务器发现对方一段时间没有活动，就可以主动关闭连接。不过，规范的做法是，客户端在
 	最后一个请求时，发送Connection: close，明确要求服务器关闭TCP连接。目前，对于同一个域名，
@@ -246,6 +247,8 @@
 	- query:通过get方式请求的参数
 	- fragment:定位
 
+http/2定义了一些以":"开始的头部字段，用来携带一些请求目标的信息
+
 
 ## 1. 请求头（Request Headers）
 **Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
@@ -270,8 +273,7 @@
 
 **If-None-Match**： If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能。
 
-**Proxy-Connection**：
-
+**origin**：发起一个针对跨域资源共享的请求
 
 ## 2. 响应头（Response Headers）
 **Server**：响应客户端的服务器。
@@ -280,8 +282,6 @@
 
 **Connection**：keep-alive，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。如果是Connection：close，代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭，当客户端再次放松Request，需要重新建立TCP连接。
 
-**Proxy-Connection**：
-
 **Pragma**：HTTP 1.0的遗留物，值为”no-chche“时禁用缓存
 
 **ETag**：服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识
@@ -289,6 +289,7 @@
 **Expires**：为服务端返回的到期时间，即下一次请求时，请求时间小于服务器返回的到期时间，直接使用缓存数据，但这是HTTP 1.0的东西，现在浏览器默认使用HTTP 1.1，所以他的作用基本忽略。
 
 **Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
+
 
    - private：客户端可以缓存
 
@@ -312,9 +313,9 @@
 
 **Content-Language**：响应正文使用的语言
 
-**Access-Control-Allow-Origin**：
+**Access-Control-Allow-Origin**：指定哪些网站可以跨域源资源共享，只能有一个值
 
-**Access-Control-Allow-Methods**：
+**Access-Control-Allow-Methods**：允许的请求类型，多个用逗号隔开
 
 
 
