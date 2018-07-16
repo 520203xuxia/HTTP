@@ -198,9 +198,6 @@
 		If-None-Match：
 		再次请求服务器时，通过此字段通知服务器客户段缓存数据的唯一标识。
 
-对比缓存生效时：
-
-
 
 两类缓存规则的不同：
 * 强制缓存如果生效，不需要再和服务器发生交互。
@@ -247,8 +244,10 @@
 	- query:通过get方式请求的参数
 	- fragment:定位
 
+
 http/2定义了一些以":"开始的头部字段，用来携带一些请求目标的信息
 
+![request-header-2.0](https://github.com/520203xuxia/HTTP/raw/master/img/request-header-2.0.png)
 
 ## 1. 请求头（Request Headers）
 **Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
