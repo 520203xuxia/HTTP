@@ -1,11 +1,18 @@
-#本文将从以下几个方面学习Http
+# 本文将从以下几个方面学习Http
 	* 一、什么是Http？
+	
 	* 二、Http状态码
+	
 	* 三、Http缓存的重要性
+	
 	* 四、缓存规则
+	
 	* 五、Http响应头和请求头
+	
 	* 六、Http协议发展历史
+	
 	* 七、Https
+	
 
 # 一、什么是Http？
 	1.（HyperText Transfer Protocol，超文本传输协议）
