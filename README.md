@@ -222,6 +222,9 @@
 
 	以 https://bloag.csdn.net/garrettzxd/article/details/80684880 网页举例分析
 
+	这篇文章解释的不错: https://www.cnblogs.com/beidan/p/cache.html
+									 https://blog.csdn.net/huantuo4908/article/details/70313165
+
 # 六、Http响应头和请求头
 	了解一下 URL/URI
 	URL:
@@ -287,7 +290,7 @@ http/2定义了一些以":"开始的头部字段，用来携带一些请求目�
 
 **Expires**：为服务端返回的到期时间，即下一次请求时，请求时间小于服务器返回的到期时间，直接使用缓存数据，但这是HTTP 1.0的东西，现在浏览器默认使用HTTP 1.1，所以他的作用基本忽略。
 
-**Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-  store，默认为private
+**Cache-Control**：通用首部字段。private|public|no-cache|max-age|no-store，默认为private
 
 
    - private：客户端可以缓存
@@ -348,6 +351,26 @@ http/2定义了一些以":"开始的头部字段，用来携带一些请求目�
 	后的名称改为 TLS（是“Transport Layer Security”的缩写），中文叫做“传输层安全协议”。
 	很多相关的文章都把这两者并列称呼（SSL/TLS），因为这两者可以视作同一个东西的不同阶段。
 
+## 4. 对称加密
+	加密和解密用的是同一个秘钥。
+### 优点：
+		速度快，对称性加密通常在消息发送方需要加密大量数据时使用，算法公开、计算量小、加密速度快、加密效率高。
+### 缺点：
+		在数据传送前，发送方和接收方必须商定好秘钥，然后使双方都能保存好秘钥。其次如果一方的秘钥被泄露，那么加密信息
+		也就不安全了。另外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的唯一秘钥，这会使得收、发双方所
+		拥有的钥匙数量巨大，密钥管理成为双方的负担。
+
+## 5. 非对称加密
+	加密解密用的是不同的秘钥，遵循的原则：公钥加密，私钥解密。（不可以私钥加密，公钥解密）
+	公钥可以公开，但私钥是服务器私有的，只要没有泄露，传输都是安全的。因为公钥加密的数据，只有私钥才能解开。
+### 优点：
+		安全
+### 缺点：
+		速度较慢
+
+	具体原理请参照阮一峰的文章：
+		http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html
+		http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html
 
 1. 客户端发起HTTPS请求
 就是用户在浏览器里输入一个https网址，然后连接到server的443端口。
@@ -373,7 +396,12 @@ http/2定义了一些以":"开始的头部字段，用来携带一些请求目�
 8. 客户端解密信息
 客户端用之前生成的私钥解密服务段传过来的信息，于是获取了解密后的内容。整个过程第三方即使监听到了数据，也束手无策。
 
-![对称加密](https://github.com/520203xuxia/HTTP/raw/master/img/对称加密.jpg)
+SSL的位置
+SSL介于应用层和TCP层之间。应用层数据不再直接传递给传输层，而是传递给SSL层，SSL层对从应用层收到的数据进行加密，并增加自己的SSL头。
+
+对称与非对称加密结合：
+
+![对称与非对称加密结合](https://github.com/520203xuxia/HTTP/raw/master/img/对称加密.jpg)
 
 
 
