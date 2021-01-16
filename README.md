@@ -24,7 +24,7 @@
 	Web服务器根据接收到的请求后，向客户端发送响应信息。
 
 # 二、Http协议发展历史
-![history](https://github.com/520203xuxia/HTTP/raw/master/img/http-history.jpg)
+![history](./img/http-history.jpg)
 
 ## 1. Http/0.9
 	该版本极其简单，只有一个命令GET。
@@ -73,7 +73,7 @@
 
 	* 使用Content-Length字段的前提是，服务器发送回应之前，必须知道回应的数据长度。对于一些很耗时
 	的操作，意味着服务器要等所有操作完成，才能发送数据，显然这样效率不高，更好的处理方法是，产生
-	一块数据，就发送一块。Transfer-Encoding：chunked 字段表面回应将由数量未定的数据块组成。
+	一块数据，就发送一块。Transfer-Encoding：chunked 字段m明回应将由数量未定的数据块组成。
 
 	* 还增加了许多方法：PUT、PATCH、HEAD、OPTIONS、DELETE。
 
@@ -127,7 +127,7 @@
 
 		- HTTP/2多个请求可同时在一个连接上并行执行。某个请求任务耗时严重，不会影响到其它连接的正常执行
 
-![connection-diff](https://github.com/520203xuxia/HTTP/raw/master/img/connection-diff.jpg)
+![connection-diff](./img/connection-diff.jpg)
 
 # 三、Http状态码
 	1xx：指示信息---表示请求已接收，继续处理
@@ -159,7 +159,7 @@
 
 # 五、缓存规则
 ## 1. 强制缓存
-![compulsion-cache](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache.jpg)
+![compulsion-cache](./img/compulsion-cache.jpg)
 
 	缓存如果未失效，则直接使用缓存数据。那么怎么判断缓存是否失效呢？
 	Http 响应header中，有两个字段标明失效规则：
@@ -173,10 +173,10 @@
 
 强制缓存生效时：
 
-![compulsion-cache-example.jpg](https://github.com/520203xuxia/HTTP/raw/master/img/compulsion-cache-example.jpg)
+![compulsion-cache-example.jpg](./img/compulsion-cache-example.jpg)
 
 ## 2. 对比缓存
-![contrast-cache](https://github.com/520203xuxia/HTTP/raw/master/img/contrast-cache.jpg)
+![contrast-cache](./img/contrast-cache.jpg)
 
 	* 对比缓存，需要进行比较判断是否可以使用缓存。
 	* 浏览器第一次请求数据时，服务器会将缓存标识与数据一起返回给客户 端，客户端将二者备份至缓存数据库中。
@@ -210,7 +210,7 @@
 
 注意看下图中，Size这一列的三个状态：from memory cache、from disk cache、资源大小，那么三种的区别在哪里？
 
-![Size](https://github.com/520203xuxia/HTTP/raw/master/img/Size.png)
+![Size](./img/Size.png)
 
 	from memory cache： 不访问服务器，直接读缓存，从内存中读取缓存。此时的数据时缓存到内存中的，当kill
 	进程后，数据将不存在
@@ -250,7 +250,7 @@
 
 http/2定义了一些以":"开始的头部字段，用来携带一些请求目标的信息
 
-![request-header-2.0](https://github.com/520203xuxia/HTTP/raw/master/img/request-header-2.0.png)
+![request-header-2.0](./img/request-header-2.0.png)
 
 ## 1. 请求头（Request Headers）
 **Host**： 请求报头域主要用于指定被请求资源的Internet主机和端口号，必须值
@@ -401,7 +401,7 @@ SSL介于应用层和TCP层之间。应用层数据不再直接传递给传输�
 
 对称与非对称加密结合：
 
-![对称与非对称加密结合](https://github.com/520203xuxia/HTTP/raw/master/img/对称加密.jpg)
+![对称与非对称加密结合](./img/对称加密.jpg)
 
 
 
